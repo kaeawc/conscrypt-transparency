@@ -1,0 +1,159 @@
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
+
+androidExtensions {
+    experimental = true
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    dexOptions {
+        preDexLibraries true
+        maxProcessCount 8
+    }
+
+    defaultConfig {
+        applicationId "io.kaeawc.conscrypttransparency"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        debug {
+            crunchPngs false
+            debuggable true
+            minifyEnabled false
+            testCoverageEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro", "proguard-dev.pro"
+        }
+        release {
+            crunchPngs true
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            testCoverageEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests.all {
+            // All the usual Gradle options.
+            jvmArgs "-noverify"
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
+            }
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        absolutePaths false
+        checkAllWarnings true
+        warning "InvalidPackage"
+    }
+
+    packagingOptions {
+        exclude "META-INF/**"
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+kapt {
+    javacOptions {
+        option("-Adagger.fastInit=enabled")
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
+    implementation "io.arrow-kt:arrow-core:${versions.arrow}"
+
+    // Android
+    implementation "androidx.core:core:${versions.androidCore}"
+    implementation "androidx.core:core-ktx:${versions.androidKtx}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerview}"
+
+    // Navigation Component
+    implementation "androidx.navigation:navigation-fragment:${versions.navigationComponent}"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+
+    // RxJava & RxAndroid
+    implementation "io.reactivex.rxjava2:rxjava:${versions.rxJava}"
+    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // HTTP
+    implementation "com.squareup.okio:okio:${versions.okio}"
+    implementation "com.squareup.moshi:moshi:${versions.moshi}"
+    implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    implementation "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+
+    // Debugging
+    implementation "com.facebook.flipper:flipper:${versions.flipper}"
+    implementation "com.facebook.flipper:flipper-network-plugin:${versions.flipper}"
+    implementation "com.facebook.flipper:flipper-leakcanary-plugin:${versions.flipper}"
+    implementation "com.facebook.soloader:soloader:${versions.soloader}"
+
+    // Security
+    implementation "org.conscrypt:conscrypt-android:${versions.conscrypt}"
+    implementation "org.bouncycastle:bcprov-jdk15on:${versions.bouncyCastle}"
+
+    // Logging
+    implementation "com.jakewharton.timber:timber:${versions.timber}"
+
+    // Date parsing
+    implementation "com.jakewharton.threetenabp:threetenabp:${versions.threeTen}"
+
+    testImplementation "junit:junit:${versions.junit}"
+    testImplementation "org.mockito:mockito-core:${versions.mockito}"
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitoForKotlin}") {
+        exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib"
+        exclude group: "org.jetbrains.kotlin", module: "kotlin-reflect"
+    }
+
+}
