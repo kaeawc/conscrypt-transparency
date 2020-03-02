@@ -23,7 +23,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     signingConfigs {
@@ -149,11 +148,11 @@ dependencies {
     // Date parsing
     implementation "com.jakewharton.threetenabp:threetenabp:${versions.threeTen}"
 
+    // Testing
     testImplementation "junit:junit:${versions.junit}"
     testImplementation "org.mockito:mockito-core:${versions.mockito}"
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitoForKotlin}") {
         exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib"
         exclude group: "org.jetbrains.kotlin", module: "kotlin-reflect"
     }
-
 }
