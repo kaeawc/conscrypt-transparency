@@ -1,4 +1,4 @@
-package io.kaeawc.conscrypttransparency
+package io.kaeawc.conscrypttransparency.utils
 
 import arrow.core.Try
 import arrow.core.orNull
@@ -6,8 +6,6 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 import org.threeten.bp.*
 import org.threeten.bp.format.DateTimeFormatter
-import java.lang.IllegalArgumentException
-import java.util.*
 
 class DateAdapter {
 

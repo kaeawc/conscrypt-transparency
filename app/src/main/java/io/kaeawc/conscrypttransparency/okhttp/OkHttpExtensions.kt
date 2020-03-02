@@ -1,4 +1,4 @@
-package io.kaeawc.conscrypttransparency
+package io.kaeawc.conscrypttransparency.okhttp
 
 import com.squareup.moshi.JsonEncodingException
 import com.squareup.moshi.Moshi

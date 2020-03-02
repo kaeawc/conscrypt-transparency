@@ -1,6 +1,7 @@
-package io.kaeawc.conscrypttransparency
+package io.kaeawc.conscrypttransparency.okhttp
 
 import com.squareup.moshi.JsonEncodingException
+import io.kaeawc.conscrypttransparency.okhttp.Empty
 import java.lang.reflect.Type
 import okhttp3.ResponseBody
 import retrofit2.Converter

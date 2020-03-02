@@ -1,6 +1,7 @@
-package io.kaeawc.conscrypttransparency
+package io.kaeawc.conscrypttransparency.rx
 
 import arrow.core.*
+import io.kaeawc.conscrypttransparency.okhttp.isRecoverable
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import io.reactivex.Flowable

@@ -9,6 +9,10 @@ import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import io.kaeawc.conscrypttransparency.*
+import io.kaeawc.conscrypttransparency.api.GenericApi
+import io.kaeawc.conscrypttransparency.okhttp.EmptyResponseFactory
+import io.kaeawc.conscrypttransparency.storage.Prefs
+import io.kaeawc.conscrypttransparency.utils.DateAdapter
 import okhttp3.Call
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -52,9 +56,9 @@ class ApiModule(val app: App) {
     @Provides
     @Singleton
     fun provideGenericApi(
-        client: Lazy<OkHttpClient>,
-        prefs: Prefs,
-        moshi: Moshi
+            client: Lazy<OkHttpClient>,
+            prefs: Prefs,
+            moshi: Moshi
     ): GenericApi {
 
         return Retrofit.Builder()

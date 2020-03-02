@@ -1,4 +1,4 @@
-package io.kaeawc.conscrypttransparency
+package io.kaeawc.conscrypttransparency.storage
 
 import com.squareup.moshi.Moshi
 import org.threeten.bp.Instant
@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import arrow.core.Try
 import arrow.core.getOrElse
+import io.kaeawc.conscrypttransparency.utils.DateAdapter
 import org.threeten.bp.Duration
 import javax.inject.Inject
 
@@ -58,7 +59,8 @@ open class Prefs @Inject constructor(val prefs: SharedPreferences, val moshi: Mo
             }
         }.getOrElse {
             val dateValue: String = prefs.get(key) ?: "1970-01-01T00:00:00Z"
-            val value = DateAdapter.tryParsing(dateValue) ?: Instant.ofEpochMilli(0)
+            val value = DateAdapter.tryParsing(dateValue)
+                    ?: Instant.ofEpochMilli(0)
             prefs.setNonNullInstant(key, value)
             value
         }

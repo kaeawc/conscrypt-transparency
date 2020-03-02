@@ -2,7 +2,7 @@ package io.kaeawc.conscrypttransparency.di
 
 import dagger.Component
 import io.kaeawc.conscrypttransparency.App
-import io.kaeawc.conscrypttransparency.MainActivity
+import io.kaeawc.conscrypttransparency.ui.MainActivity
 import javax.inject.Singleton
 
 @Singleton
